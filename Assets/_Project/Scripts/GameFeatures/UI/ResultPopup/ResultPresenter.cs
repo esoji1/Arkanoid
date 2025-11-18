@@ -1,7 +1,7 @@
 ﻿using System;
+using _Project.Core.IndependentComponents;
 using _Project.Core.Services;
 using _Project.GameFeatures.EndOfGame;
-using UnityEngine.SceneManagement;
 using Zenject;
 
 namespace _Project.GameFeatures.UI.ResultPopup
@@ -11,13 +11,15 @@ namespace _Project.GameFeatures.UI.ResultPopup
         private readonly EndOfGameManager _endOfGameManager;
         private readonly ResultPopup _resultPopup;
         private readonly PointsService _pointsService;
+        private readonly ZenjectSceneLoaderWrapper _zenjectSceneLoaderWrapper;
 
         public ResultPresenter(EndOfGameManager endOfGameManager, ResultPopup resultPopup,
-            PointsService pointsService)
+            PointsService pointsService, ZenjectSceneLoaderWrapper zenjectSceneLoaderWrapper)
         {
             _endOfGameManager = endOfGameManager;
             _resultPopup = resultPopup;
             _pointsService = pointsService;
+            _zenjectSceneLoaderWrapper = zenjectSceneLoaderWrapper;
         }
 
         public void Initialize()
@@ -48,6 +50,6 @@ namespace _Project.GameFeatures.UI.ResultPopup
         }
 
         private void OnRestartClicked() =>
-            SceneManager.LoadScene(0);
+            _zenjectSceneLoaderWrapper.Load(null, 0);
     }
 }

@@ -17,6 +17,7 @@ namespace _Project.GameFeatures.UI.PointsView
 
         public void Initialize()
         {
+            _pointsService.ChangePoints(0);
             OnAddPoints(_pointsService.Points);
             _pointsService.OnAddPoints += OnAddPoints;
         }

@@ -10,6 +10,7 @@ namespace _Project.Core.Installers
         {
             BindFPSCapRemover();
             BindServices();
+            BindLoad();
         }
 
         private void BindFPSCapRemover()
@@ -28,6 +29,13 @@ namespace _Project.Core.Installers
         {
             Container
                 .Bind<PointsService>()
+                .AsSingle();
+        }
+        
+        private void BindLoad()
+        {
+            Container
+                .Bind<ZenjectSceneLoaderWrapper>()
                 .AsSingle();
         }
     }

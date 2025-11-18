@@ -13,10 +13,10 @@ namespace _Project.GameFeatures.DestructionTiles
         [SerializeField, Range(0f, 1f)] private float _timeDestroy = 0.1f;
         [SerializeField] private int _givesPoints;
 
-        public PointsService _pointsService;
+        private PointsService _pointsService;
         private Health _health;
         private bool _isDead;
-        
+
         public event Action OnTileDeath;
 
         [Inject]
@@ -32,11 +32,8 @@ namespace _Project.GameFeatures.DestructionTiles
         public void Damage(int damage) =>
             _health.TakeDamage(damage);
 
-        private void OnDestroy()
-        {
-            if (_health != null)
-                _health.OnDeath -= OnDeath;
-        }
+        private void OnDestroy() =>
+            _health.OnDeath -= OnDeath;
 
         private async void OnDeath()
         {
